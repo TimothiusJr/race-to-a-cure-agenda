@@ -1,0 +1,120 @@
+.event-header {
+    position: relative;
+    min-height: 340px;
+    padding: 34px 20px 40px;
+    overflow: hidden;
+
+    color: #ffffff;
+    text-align: center;
+
+    background:
+            radial-gradient(
+                    circle at 15% 35%,
+                    rgba(211, 160, 24, 0.2),
+                    transparent 28%
+            ),
+            radial-gradient(
+                    circle at 85% 70%,
+                    rgba(211, 160, 24, 0.16),
+                    transparent 25%
+            ),
+            #111111;
+}
+
+.event-header__logo {
+    position: relative;
+    z-index: 1;
+
+    width: min(100%, 360px);
+    margin: 0 auto;
+}
+
+.event-header__the {
+    margin-bottom: -3px;
+
+    color: #ffffff;
+    font-family: var(--heading-font);
+    font-size: 20px;
+    letter-spacing: 7px;
+    line-height: 1;
+}
+
+.event-header__amazing {
+    color: #ffffff;
+    font-family: var(--heading-font);
+    font-size: clamp(50px, 14vw, 70px);
+    letter-spacing: 1px;
+    line-height: 0.95;
+}
+
+.event-header__race-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+}
+
+.event-header__race {
+    color: #d6a21a;
+    font-family: var(--heading-font);
+    font-size: clamp(72px, 20vw, 102px);
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 0.9;
+}
+
+.event-header__blood-drop {
+    width: 30px;
+    height: 38px;
+    margin-top: 10px;
+
+    background: linear-gradient(135deg, #ff4545, #970808);
+    border: 2px solid #690606;
+    border-radius: 50% 50% 55% 55%;
+
+    box-shadow:
+            inset 5px 4px 7px rgba(255, 255, 255, 0.3),
+            0 3px 6px rgba(0, 0, 0, 0.45);
+
+    transform: rotate(45deg);
+}
+
+.event-header__brush {
+    width: 96%;
+    margin: 4px auto 10px;
+    padding: 10px 8px 8px;
+
+    color: #202020;
+    font-family: var(--heading-font);
+    font-size: clamp(22px, 6vw, 31px);
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1;
+    white-space: nowrap;
+
+    background: #f5f1e7;
+
+    clip-path: polygon(
+            2% 10%,
+            98% 2%,
+            100% 86%,
+            93% 95%,
+            4% 100%,
+            0 78%
+    );
+}
+
+.event-header__cure {
+    color: var(--red);
+}
+
+.event-header__hematology {
+    font-family: var(--heading-font);
+    font-size: clamp(23px, 6vw, 31px);
+    letter-spacing: 4px;
+    line-height: 1;
+}
+
+.event-header__hematology span:last-child {
+    color: var(--red);
+}

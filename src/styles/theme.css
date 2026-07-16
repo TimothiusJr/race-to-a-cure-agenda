@@ -1,0 +1,27 @@
+:root {
+
+    /* Brand Colors */
+
+    --bg-black: #121212;
+    --bg-paper: #F5EEDB;
+    --blue: #0F5F8F;
+    --gold: #D6A21A;
+    --red: #D62828;
+    --white: #FFFFFF;
+    --text: #1F1F1F;
+    --divider: rgba(0,0,0,.15);
+
+    /* Fonts */
+
+    --heading-font: "Bebas Neue", sans-serif;
+    --body-font: "Inter", sans-serif;
+
+    /* Shadows */
+
+    --shadow:
+            0 8px 24px rgba(0,0,0,.25);
+
+    /* Radius */
+
+    --radius:16px;
+}
