@@ -7,10 +7,13 @@ import SessionDetails from "./pages/SessionDetails";
 import EventInfo from "./pages/EventInfo";
 import Resources from "./pages/Resources";
 import NotFound from "./pages/NotFound";
+import ScrollToTop from "./components/common/ScrollToTop";
 
 export default function App() {
     return (
         <div className="app">
+            <ScrollToTop />
+
             <Routes>
                 <Route element={<AppLayout />}>
                     <Route index element={<Home />} />
