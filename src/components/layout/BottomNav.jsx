@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 import homeIcon from "../../assets/images/navigation/home-passport.png";
 import agendaIcon from "../../assets/images/navigation/agenda-map.png";
 import infoIcon from "../../assets/images/navigation/info-compass.png";

@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router";
+import { Link, useParams } from "react-router-dom";
 import { agendaDays } from "../data/agenda";
 
 export default function SessionDetails() {

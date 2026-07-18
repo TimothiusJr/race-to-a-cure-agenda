@@ -1,8 +1,4 @@
-import {
-    BrowserRouter,
-    Route,
-    Routes,
-} from "react-router";
+import { Route, Routes } from "react-router-dom";
 
 import AppLayout from "./components/layout/AppLayout";
 import Home from "./pages/Home";
@@ -14,20 +10,21 @@ import NotFound from "./pages/NotFound";
 
 export default function App() {
     return (
-        <BrowserRouter>
-            <div className="app">
+        <div className="app">
             <Routes>
                 <Route element={<AppLayout />}>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/agenda" element={<Agenda />} />
-                    <Route path="/agenda/session/:sessionId" element={<SessionDetails />} />
-                    <Route path="/info" element={<EventInfo />} />
-                    <Route path="/resources" element={<Resources />} />
+                    <Route index element={<Home />} />
+                    <Route path="agenda" element={<Agenda />} />
+                    <Route
+                        path="agenda/session/:sessionId"
+                        element={<SessionDetails />}
+                    />
+                    <Route path="info" element={<EventInfo />} />
+                    <Route path="resources" element={<Resources />} />
                 </Route>
 
                 <Route path="*" element={<NotFound />} />
             </Routes>
-            </div>
-        </BrowserRouter>
+        </div>
     );
 }
