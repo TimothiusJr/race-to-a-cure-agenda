@@ -13,7 +13,7 @@ export default function EventInfo() {
 
             <div className="info-card">
                 <span className="info-label">Venue</span>
-                <h2>Renaissance Schaumburg Convention Center Hotel</h2>
+                <h2>InterContinental Chicago Magnificent Mile</h2>
             </div>
 
             <div className="info-card">
@@ -38,12 +38,12 @@ export default function EventInfo() {
                     <article className="room-card">
                         <div className="room-card__number">01</div>
 
-
                         <div>
                             <h3>Renaissance Ballroom</h3>
                             <p>
-                                Main gathering space for general sessions, team activities,
-                                presentations, and the Amazing Race kickoff.
+                                Primary meeting space for general sessions,
+                                leadership discussions, presentations, and
+                                shared programming.
                             </p>
                         </div>
                     </article>
@@ -54,8 +54,33 @@ export default function EventInfo() {
                         <div>
                             <h3>Toledo Room</h3>
                             <p>
-                                Secondary meeting space for smaller sessions, breakout activities,
-                                and supporting event programming.
+                                Meeting space used for Field sessions,
+                                workshops, STEM programming, and other
+                                breakout activities.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article className="room-card">
+                        <div className="room-card__number">03</div>
+
+                        <div>
+                            <h3>Camelot Room</h3>
+                            <p>
+                                Main hospitality space for breakfast,
+                                lunch, and select event activities.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article className="room-card">
+                        <div className="room-card__number">04</div>
+
+                        <div>
+                            <h3>Dumas Meeting Room</h3>
+                            <p>
+                                Supporting meeting space used for scheduled
+                                breaks and headshots during the offsite.
                             </p>
                         </div>
                     </article>
@@ -65,7 +90,7 @@ export default function EventInfo() {
             <section className="venue-map">
                 <div className="venue-map__heading">
                     <span>Venue Guide</span>
-                    <h2>Floor Plan</h2>
+                    <h2>Fifth Floor Plan</h2>
                 </div>
 
                 <figure className="venue-map__card">
@@ -73,28 +98,30 @@ export default function EventInfo() {
                         type="button"
                         className="venue-map__button"
                         onClick={() => setIsMapOpen(true)}
-                        aria-label="Open enlarged venue floor plan"
+                        aria-label="Open enlarged fifth floor venue plan"
                     >
                         <img
                             src={venueFloorPlan}
-                            alt="Floor plan showing the Renaissance Ballroom, Toledo Room, elevators, stairs, and registration area"
+                            alt="Fifth floor venue plan showing Renaissance Ballroom, Toledo Room, elevators, restrooms, and nearby meeting spaces"
                         />
 
                         <span>Tap to enlarge</span>
                     </button>
 
                     <figcaption>
-                        Use the floor plan to locate the Renaissance Ballroom, Toledo Room,
-                        registration area, elevators, and nearby meeting spaces.
+                        Fifth Floor Venue Guide — use this map to locate
+                        Renaissance Ballroom, Toledo Room, elevators,
+                        restrooms, and nearby meeting spaces.
                     </figcaption>
                 </figure>
             </section>
 
             <div className="info-card">
                 <span className="info-label">Important Reminder</span>
+
                 <p>
-                    Please arrive at each session a few minutes early and keep your badge
-                    visible throughout the event.
+                    Please arrive at each session a few minutes early and
+                    keep your badge visible throughout the event.
                 </p>
             </div>
 
@@ -103,7 +130,7 @@ export default function EventInfo() {
                     className="map-modal"
                     role="dialog"
                     aria-modal="true"
-                    aria-label="Enlarged venue floor plan"
+                    aria-label="Enlarged fifth floor venue plan"
                 >
                     <button
                         type="button"
@@ -117,7 +144,7 @@ export default function EventInfo() {
                     <div className="map-modal__content">
                         <img
                             src={venueFloorPlan}
-                            alt="Enlarged floor plan showing the Renaissance Ballroom, Toledo Room, elevators, stairs, and registration area"
+                            alt="Enlarged fifth floor venue plan showing Renaissance Ballroom, Toledo Room, elevators, restrooms, and nearby meeting spaces"
                         />
                     </div>
                 </div>

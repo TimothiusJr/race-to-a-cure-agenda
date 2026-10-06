@@ -5,28 +5,40 @@ export default function Resources() {
         {
             id: 1,
             title: "Full Event Agenda",
-            description: "View the complete three-day schedule.",
+            description:
+                "View the complete three-day In-House and Field schedules.",
             status: "Available",
             path: "/agenda",
         },
         {
             id: 2,
-            title: "Venue Map",
-            description: "Locate the Renaissance Ballroom and Toledo Room.",
+            title: "Fifth Floor Venue Guide",
+            description:
+                "Locate Renaissance Ballroom, Toledo Room, elevators, restrooms, and nearby meeting spaces.",
             status: "Available",
             path: "/info",
         },
         {
             id: 3,
+            title: "Event Information",
+            description:
+                "Review the venue, meeting spaces, theme, and important event details.",
+            status: "Available",
+            path: "/info",
+        },
+        {
+            id: 4,
             title: "Presentation Materials",
-            description: "Slides and supporting event documents.",
+            description:
+                "Access slides and supporting materials shared during the offsite.",
             status: "Coming Soon",
             path: null,
         },
         {
-            id: 4,
-            title: "Contact Information",
-            description: "Event support and important contacts.",
+            id: 5,
+            title: "Event Support & Contacts",
+            description:
+                "Find key contacts and support information for the event.",
             status: "Coming Soon",
             path: null,
         },
@@ -36,8 +48,13 @@ export default function Resources() {
         <section className="resources-page">
             <header className="resources-header">
                 <p>Race Materials</p>
+
                 <h1>Resources</h1>
-                <span>Access useful files and event information.</span>
+
+                <span>
+                    Quick access to schedules, venue information,
+                    and event materials.
+                </span>
             </header>
 
             <div className="resources-list">
@@ -50,6 +67,7 @@ export default function Resources() {
 
                             <div className="resource-card__content">
                                 <h2>{resource.title}</h2>
+
                                 <p>{resource.description}</p>
 
                                 <span
@@ -59,8 +77,8 @@ export default function Resources() {
                                             : "resource-card__status"
                                     }
                                 >
-                  {resource.status}
-                </span>
+                                    {resource.status}
+                                </span>
                             </div>
                         </>
                     );
@@ -74,7 +92,10 @@ export default function Resources() {
                             {cardContent}
                         </Link>
                     ) : (
-                        <article className="resource-card" key={resource.id}>
+                        <article
+                            className="resource-card"
+                            key={resource.id}
+                        >
                             {cardContent}
                         </article>
                     );

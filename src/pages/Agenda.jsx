@@ -1,16 +1,35 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+
 import { agendaDays } from "../data/agenda";
 import AgendaCard from "../components/agenda/AgendaCard";
 
-
 export default function Agenda() {
-    const [selectedDay, setSelectedDay] = useState("day-1");
+    const [searchParams, setSearchParams] = useSearchParams();
     const [searchQuery, setSearchQuery] = useState("");
-    const activeDay = agendaDays.find((day) => day.id === selectedDay);
+
+    const requestedDay = searchParams.get("day");
+    const requestedTrack = searchParams.get("track");
+
+    const selectedDay = agendaDays.some((day) => day.id === requestedDay)
+        ? requestedDay
+        : "day-1";
+
+    const selectedTrack =
+        requestedTrack === "field" || requestedTrack === "in-house"
+            ? requestedTrack
+            : "in-house";
+
+    const activeDay =
+        agendaDays.find((day) => day.id === selectedDay) ?? agendaDays[0];
 
     const normalizedQuery = searchQuery.trim().toLowerCase();
 
     const filteredSessions = activeDay.sessions.filter((session) => {
+        if (session.track !== selectedTrack) {
+            return false;
+        }
+
         if (!normalizedQuery) {
             return true;
         }
@@ -18,8 +37,12 @@ export default function Agenda() {
         const searchableText = [
             session.title,
             session.details,
+            session.description,
             session.responsible,
+            session.speaker,
+            session.room,
             session.time,
+            session.track,
         ]
             .filter(Boolean)
             .join(" ")
@@ -28,16 +51,72 @@ export default function Agenda() {
         return searchableText.includes(normalizedQuery);
     });
 
+    function handleDayChange(dayId) {
+        setSearchParams({
+            day: dayId,
+            track: selectedTrack,
+        });
+
+        setSearchQuery("");
+    }
+
+    function handleTrackChange(track) {
+        setSearchParams({
+            day: selectedDay,
+            track,
+        });
+
+        setSearchQuery("");
+    }
+
     return (
         <section className="agenda-page">
             <header className="agenda-page__header">
                 <p className="agenda-page__eyebrow">Offsite Schedule</p>
                 <h1>Agenda</h1>
-                <p>Select a day to view the full schedule.</p>
+                <p>Select your agenda and day to view the full schedule.</p>
             </header>
 
+            {/* Agenda Type Selector */}
+            <div
+                className="agenda-tabs"
+                role="tablist"
+                aria-label="Agenda type"
+            >
+                <button
+                    type="button"
+                    role="tab"
+                    aria-selected={selectedTrack === "in-house"}
+                    className={
+                        selectedTrack === "in-house"
+                            ? "agenda-tabs__button active"
+                            : "agenda-tabs__button"
+                    }
+                    onClick={() => handleTrackChange("in-house")}
+                >
+                    In-House
+                </button>
+
+                <button
+                    type="button"
+                    role="tab"
+                    aria-selected={selectedTrack === "field"}
+                    className={
+                        selectedTrack === "field"
+                            ? "agenda-tabs__button active"
+                            : "agenda-tabs__button"
+                    }
+                    onClick={() => handleTrackChange("field")}
+                >
+                    Field
+                </button>
+            </div>
+
+            {/* Search */}
             <div className="agenda-search">
-                <label htmlFor="agenda-search-input">Search the schedule</label>
+                <label htmlFor="agenda-search-input">
+                    Search the schedule
+                </label>
 
                 <div className="agenda-search__field">
                     <span aria-hidden="true">⌕</span>
@@ -46,8 +125,10 @@ export default function Agenda() {
                         id="agenda-search-input"
                         type="search"
                         value={searchQuery}
-                        onChange={(event) => setSearchQuery(event.target.value)}
-                        placeholder="Search sessions, people, or times"
+                        onChange={(event) =>
+                            setSearchQuery(event.target.value)
+                        }
+                        placeholder="Search sessions, people, rooms, or times"
                     />
 
                     {searchQuery && (
@@ -62,40 +143,61 @@ export default function Agenda() {
                 </div>
             </div>
 
-            <div className="agenda-tabs" role="tablist" aria-label="Agenda days">
-                {agendaDays.map((day) => (
-                    <button
-                        key={day.id}
-                        type="button"
-                        role="tab"
-                        aria-selected={selectedDay === day.id}
-                        className={
-                            selectedDay === day.id
-                                ? "agenda-tabs__button active"
-                                : "agenda-tabs__button"
-                        }
-                        onClick={() => setSelectedDay(day.id)}
-                    >
-                        Day {day.dayNumber}
-                    </button>
-                ))}
+            {/* Day Selector */}
+            <div
+                className="agenda-tabs"
+                role="tablist"
+                aria-label="Agenda days"
+            >
+                {agendaDays.map((day) => {
+                    const isActive = selectedDay === day.id;
+
+                    return (
+                        <button
+                            key={day.id}
+                            type="button"
+                            role="tab"
+                            aria-selected={isActive}
+                            className={
+                                isActive
+                                    ? "agenda-tabs__button active"
+                                    : "agenda-tabs__button"
+                            }
+                            onClick={() => handleDayChange(day.id)}
+                        >
+                            Day {day.dayNumber}
+                        </button>
+                    );
+                })}
             </div>
 
+            {/* Selected Day */}
             <div className="agenda-day">
                 <div className="agenda-day__heading">
-                    <span>Day {activeDay.dayNumber}</span>
-                    <h2>{activeDay.title}</h2>
+                    <span>
+                        {selectedTrack === "in-house"
+                            ? "In-House Agenda"
+                            : "Field Agenda"}
+                    </span>
+
+                    <h2>Day {activeDay.dayNumber}</h2>
                 </div>
 
                 <div className="agenda-list">
                     {filteredSessions.length > 0 ? (
                         filteredSessions.map((session) => (
-                            <AgendaCard key={session.id} session={session} />
+                            <AgendaCard
+                                key={session.id}
+                                session={session}
+                                dayId={activeDay.id}
+                            />
                         ))
                     ) : (
                         <div className="agenda-empty">
                             <strong>No sessions found</strong>
-                            <p>Try a different title, person, or time.</p>
+                            <p>
+                                Try a different title, person, room, or time.
+                            </p>
                         </div>
                     )}
                 </div>
